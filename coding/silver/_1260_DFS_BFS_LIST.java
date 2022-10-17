@@ -4,20 +4,17 @@ import java.io.*;
 import java.util.*;
 
 public class _1260_DFS_BFS_LIST {
-    static int N;
-    static int M;
     static boolean[] visited;
     static List<List<Integer>> graph = new ArrayList<>();
-    static StringBuilder dfs_sb = new StringBuilder();
-    static StringBuilder bfs_sb = new StringBuilder();
+    static StringBuilder sb = new StringBuilder();
 
     // Silver 2 - DFS와 BFS, 인접 리스트
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
         String[] S = br.readLine().split(" ");
-        N = Integer.parseInt(S[0]);
-        M = Integer.parseInt(S[1]);
+        int N = Integer.parseInt(S[0]);
+        int M = Integer.parseInt(S[1]);
         int V = Integer.parseInt(S[2]);
 
         for (int i=0; i<=N; i++) {
@@ -38,15 +35,15 @@ public class _1260_DFS_BFS_LIST {
 
         visited = new boolean[N+1];
         dfs(V);
+        sb.append("\n");
         visited = new boolean[N+1];
         bfs(V);
 
-        System.out.println(dfs_sb);
-        System.out.println(bfs_sb);
+        System.out.println(sb);
     }
 
     public static void dfs(int V) {
-        dfs_sb.append(V).append(" ");
+        sb.append(V).append(" ");
         visited[V] = true;
         for (int v : graph.get(V)) {
             if (!visited[v]) dfs(v);
@@ -56,14 +53,14 @@ public class _1260_DFS_BFS_LIST {
     public static void bfs(int V) {
         Queue<Integer> queue = new LinkedList<>();
         queue.offer(V);
-        bfs_sb.append(V).append(" ");
+        sb.append(V).append(" ");
         visited[V] = true;
 
         while (!queue.isEmpty()) {
             for (int v : graph.get(queue.poll())) {
                 if (!visited[v]) {
                     queue.offer(v);
-                    bfs_sb.append(v).append(" ");
+                    sb.append(v).append(" ");
                     visited[v] = true;
                 }
             }
